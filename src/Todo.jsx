@@ -5,24 +5,23 @@ import "./style.css";
 export default function Todo() {
   const [newTodo, setNewTodo] = useState("");
   const [todos, setTodos] = useState([]);
-  const [isFormSubmit, setIsFormSubmit] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem("todos")) {
       const storedTodos = JSON.parse(localStorage.getItem("todos"));
       setTodos([...storedTodos]);
     }
-  },[]) 
+  }, []);
 
   useEffect(() => {
     if (todos.length) {
       localStorage.setItem("todos", JSON.stringify(todos));
     }
+
   }, [todos]);
 
   function formSubmit(e) {
     e.preventDefault();
-    setIsFormSubmit(true);
     setTodos((current) => {
       return [...current, { id: crypto.randomUUID(), title: newTodo }];
     });
@@ -35,6 +34,18 @@ export default function Todo() {
     });
   }
 
+ const editTodo = (id, newTitle) => {
+   setTodos((current) =>
+     current.map((obj) => {
+       if (obj.id === id) {
+         return { ...obj, title: newTitle };
+       }
+
+       return obj;
+     })
+   );
+ };
+
   return (
     <div className="section-main">
       <div className="container">
@@ -44,7 +55,11 @@ export default function Todo() {
           handleFormSubmit={formSubmit}
           value={newTodo}
         />
-        <TodoList todoItems={todos} deleteItem={deletTodo} />
+        <TodoList
+          todoItems={todos}
+          deleteItem={deletTodo}
+          editItem={editTodo}
+        />
       </div>
     </div>
   );

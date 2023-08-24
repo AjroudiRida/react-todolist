@@ -1,4 +1,5 @@
 import { IoAddOutline } from "react-icons/io5";
+import { PropTypes } from 'prop-types';
 export default function TodoForm({ handleChange, handleFormSubmit, value }) {
   return (
     <>
@@ -17,3 +18,9 @@ export default function TodoForm({ handleChange, handleFormSubmit, value }) {
     </>
   );
 }
+
+TodoForm.propTypes = {
+  handleChange: PropTypes.func,
+  handleFormSubmit: PropTypes.func,
+  value: PropTypes.string
+};

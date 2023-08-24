@@ -43,7 +43,7 @@ body {
   max-width: 100%;
   outline: none;
   border: none;
-  box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 1px 2px 5px 0 rgba(0, 0, 0, 0.75);
   padding: 1.2rem 5rem;
   font-size: 2rem;
 }
@@ -72,7 +72,6 @@ body {
   margin-right: 2rem;
 }
 
-
 .todo-item-delete-btn {
   display: flex;
   justify-content: center;
@@ -85,4 +84,8 @@ body {
 .todo-item-text {
   position: absolute;
   left: 6rem;
+  width: 70%;
+  overflow: hidden;
+  outline: none;
+  white-space: nowrap;
 }
